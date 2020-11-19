@@ -31,5 +31,7 @@ tweets=api.mentions_timeline(last_read_file(file),tweet_mode='extended') #contai
 # print(tweets[1].text)
 
 for tweet in tweets:
-    # if '#randomtweet' in tweet.text.lower():
-    print(str(tweet.id) + ' - ' + tweet.text)
+    if '#randomtweet' in tweet.full_text.lower():
+        print(str(tweet.id) + ' - ' + tweet.full_text)
+        api.update_status("@" + tweet.user.screen_name + " Have a nice day!", tweet.id)
+    store_readids(file,tweet.id) #Once replied by the bot it has to be removed and write method basically overwrites the file-content, hence removing the prev. replied data(if it contains the hashtag)
