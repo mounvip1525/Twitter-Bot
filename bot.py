@@ -15,7 +15,7 @@ api = tweepy.API(auth)
 
 
 file='prev_replied.txt'
-def read_file(file):
+def last_read_file(file):
     file_read=open(file,'r')
     last_read_id=int(file_read.read().strip())
     file_read.close()
@@ -27,7 +27,7 @@ def store_readids(file,last_read_id):
     return
 
     
-tweets=api.mentions_timeline(last_read_id,tweet_mode='extended') #contains recent 20 mentions from any account
+tweets=api.mentions_timeline(last_read_file(file),tweet_mode='extended') #contains recent 20 mentions from any account
 # print(tweets[1].text)
 
 for tweet in tweets:
